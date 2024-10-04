@@ -1,0 +1,260 @@
+/* 기본 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f0f0f0;
+}
+
+/* 헤더 스타일 */
+h1 {
+    margin-top: 20px;
+    font-size: 24px;
+    color: #333;
+}
+/* 슬롯 안의 이미지 스타일 */
+.slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* 이미지가 슬롯에 맞게 비율 유지하면서 축소됨 */
+    object-position: center; /* 이미지가 가운데 정렬되도록 설정 */
+}
+
+/* 슬롯 배열 설정 (윗칸 4칸, 아래칸 3칸) */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 90px); /* 첫 번째 행에 4칸 */
+    grid-template-rows: 90px 90px; /* 두 개의 행 */
+    gap: 5px;
+    justify-content: center;
+    margin: 20px auto;
+}
+
+/* 슬롯 스타일: 정사각형 */
+.slot {
+    width: 90px;
+    height: 90px;
+    border: 2px dashed #ccc;
+    cursor: pointer;
+    background-color: #fff;
+    position: relative;
+}
+
+.ward-slot {
+    border: 2px dashed #8bc34a; /* 와드 슬롯 강조 */
+}
+
+/* 선택 및 선택 취소 버튼 스타일 */
+#controls {
+    margin: 20px 0;
+}
+
+#select-button, #cancel-last-button, #clear-button {
+    padding: 10px 15px;
+    margin: 0 10px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+#cancel-last-button {
+    background-color: #e74c3c; /* 섹터 취소 버튼은 빨간색 */
+}
+
+#clear-button {
+    background-color: #95a5a6; /* 선택 취소 버튼은 회색 */
+}
+
+#select-button:hover, #cancel-last-button:hover, #clear-button:hover {
+    opacity: 0.9;
+}
+
+/* 캡처 섹션 스타일 */
+#capture-section {
+    margin-top: 30px;
+}
+
+#capture-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.capture-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* 섹터 스타일 */
+.capture-sector {
+    background-color: #ffffff; /* 섹터 배경을 흰색으로 설정 */
+    padding: 10px;
+    border-radius: 8px; /* 원하는 경우 모서리를 둥글게 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 약간의 그림자를 추가하여 구분 */
+}
+
+/* 나머지 스타일들 */
+.capture-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+
+/* 캡처된 슬롯들의 그리드 스타일: 윗줄에 4칸, 아래줄에 3칸 */
+.capture-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    justify-items: center;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.capture-grid > .captured-slot:nth-child(n+5) {
+    grid-column: span 1;
+}
+
+/* 캡처된 슬롯 스타일 */
+.captured-slot {
+    width: 30px;
+    height: 30px;
+    border: 2px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.captured-slot img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+/* 화살표 스타일 */
+/* 화살표 스타일 수정 */
+.arrow {
+    font-size: 2em; /* 화살표 크기를 크게 설정 */
+    color: red; /* 화살표 색상을 빨간색으로 설정 */
+    font-weight: bold; /* 화살표 두께를 두껍게 설정 */
+    line-height: 1; /* 화살표와 다른 요소 간 간격을 줄이기 위해 설정 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 10px; /* 화살표 앞쪽 패딩 추가 */
+    padding-right: 10px; /* 화살표 뒤쪽 패딩 추가 */
+}
+
+
+/* 카테고리 및 아이템 팝업 스타일 */
+#category-popup, #item-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 15px;
+    border: 2px solid #ccc;
+    z-index: 1000;
+    width: 80%;
+    max-width: 600px;
+    max-height: 80%;
+    overflow-y: auto;
+    display: none;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 8px;
+    justify-items: center;
+    margin-top: 10px;
+}
+
+/* 아이템 목록 그리드 스타일 */
+.item-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* 컬럼 최소 크기를 줄여 더 많은 아이템이 한 줄에 배치되도록 설정 */
+    gap: 8px; /* 아이템 간의 간격을 줄임 */
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+}
+
+/* 아이템 스타일 */
+.item {
+    width: 100%;
+    height: 100px; /* 그리드 셀 높이를 줄여 이미지가 팝업을 넘지 않도록 조정 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* 셀을 넘는 이미지가 보이지 않도록 설정 */
+}
+
+.item img {
+    width: auto;
+    height: 100%; /* 이미지 높이를 셀의 높이에 맞춤 */
+    max-width: 100%; /* 이미지가 셀의 너비를 넘지 않도록 설정 */
+    object-fit: contain; /* 이미지가 셀 안에 맞도록 조정 */
+    border-radius: 4px;
+}
+
+
+.category {
+    margin: 5px;
+    padding: 10px;
+    border: 1px solid #000;
+    cursor: pointer;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* 푸터 스타일 */
+/* 푸터 스타일 */
+footer {
+    background-color: #333; /* 배경색을 어두운 색으로 설정 */
+    color: white; /* 텍스트 색상을 흰색으로 설정 */
+    padding: 3px; /* 내부 패딩 */
+    position: relative; /* 푸터를 페이지 하단에 배치 */
+    bottom: 0;
+    width: 100%;
+    margin-top: 10px; /* 페이지 콘텐츠와 푸터 간의 여백 */
+}
+
+.footer-content {
+    display: flex; /* Flexbox 사용 */
+    justify-content: left; /* 왼쪽 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+    gap: 30px; /* 각 요소 간의 간격 설정 */
+    flex-wrap: wrap; /* 화면이 작아지면 요소를 다음 줄로 감쌀 수 있도록 설정 */
+}
+
+.footer-content a {
+    color: #00bfff; /* 링크 색상을 밝은 파란색으로 설정 */
+    text-decoration: none; /* 링크 밑줄 제거 */
+}
+
+.footer-content a:hover {
+    text-decoration: underline; /* 링크에 마우스를 올렸을 때 밑줄 표시 */
+}
+
+.footer-links {
+    list-style-type: none; /* 목록 앞의 점 제거 */
+    padding: 0; /* 목록의 기본 패딩 제거 */
+    margin: 0; /* 목록의 기본 마진 제거 */
+}
+
+.footer-links li {
+    display: inline; /* 목록 항목을 한 줄에 표시 */
+}
+
+
