@@ -346,11 +346,22 @@ function exportAllSlotsAsImage(format = 'png') {
     const allSlotsContainer = document.getElementById('item-container'); // 모든 슬롯이 있는 컨테이너 선택
 
     if (allSlotsContainer) {
+        // 캡처 전에 패딩을 일시적으로 추가하여 아래쪽 잘림 방지
+        allSlotsContainer.style.paddingBottom = '20px';
+
         html2canvas(allSlotsContainer, {
             backgroundColor: null,
             useCORS: true, // CORS 문제 해결
-            allowTaint: true // 타사 도메인에서 로드된 이미지 처리
+            allowTaint: true, // 타사 도메인에서 로드된 이미지 처리
+            scrollX: 0,
+            scrollY: 0,
+            windowWidth: document.documentElement.scrollWidth,
+            windowHeight: document.documentElement.scrollHeight,
+            scale: window.devicePixelRatio
         }).then(canvas => {
+            // 캡처 후 원래 상태로 되돌리기
+            allSlotsContainer.style.paddingBottom = '';
+
             const link = document.createElement('a');
             if (format === 'png') {
                 link.href = canvas.toDataURL('image/png');
@@ -367,6 +378,7 @@ function exportAllSlotsAsImage(format = 'png') {
         console.warn('내보낼 슬롯이 없습니다.');
     }
 }
+
 
 // 모든 슬롯 PNG 내보내기 버튼 추가
 document.getElementById('export-all-slots-png-button').addEventListener('click', () => {
