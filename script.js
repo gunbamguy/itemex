@@ -1,5 +1,5 @@
 let version = '';
-
+let cancelButtonsVisible = true; // 취소 버튼이 보이는 상태를 추적하는 변수
 // 영어 태그를 한글로 변환하는 객체
 const tagTranslations = {
     "Boots": "신발",
@@ -123,7 +123,6 @@ function handleSlotClick() {
 }
 
 // 슬롯에 아이템 선택
-// 슬롯에 아이템 선택
 function selectItem(id, element) {
     const slotNumber = selectedSlot.dataset.slot;
     const slot = document.querySelector(`.slot[data-slot="${slotNumber}"]`);
@@ -140,6 +139,9 @@ function selectItem(id, element) {
     const cancelButton = document.createElement('button');
     cancelButton.textContent = '취소';
     cancelButton.classList.add('cancel-slot-button');
+    if (!cancelButtonsVisible) {
+        cancelButton.classList.add('hidden'); // 취소 버튼이 보이지 않는 상태라면 hidden 클래스 추가
+    }
     cancelButton.addEventListener('click', (event) => {
         event.stopPropagation(); // 슬롯 클릭 이벤트를 방지
         slot.innerHTML = ''; // 슬롯 비우기
@@ -147,17 +149,19 @@ function selectItem(id, element) {
     slot.appendChild(cancelButton);
 }
 
-// 취소 버튼 토글 기능
+// 취소 버튼 ON/OFF 기능
 function toggleCancelButtons() {
     const cancelButtons = document.querySelectorAll('.cancel-slot-button');
+    cancelButtonsVisible = !cancelButtonsVisible; // 현재 상태 반전
     cancelButtons.forEach(button => {
-        button.classList.toggle('hidden');
+        if (cancelButtonsVisible) {
+            button.classList.remove('hidden'); // 취소 버튼 보이기
+        } else {
+            button.classList.add('hidden'); // 취소 버튼 숨기기
+        }
     });
 }
 
-document.getElementById('toggle-cancel-button').addEventListener('click', () => {
-    toggleCancelButtons();
-});
 
 
 // 모든 슬롯 상태 캡처
@@ -278,6 +282,11 @@ document.querySelectorAll('.slot').forEach(slot => {
         selectedSlot = slot;
         handleSlotClick();
     });
+});
+
+// 토글 버튼 이벤트 추가
+document.getElementById('toggle-cancel-button').addEventListener('click', () => {
+    toggleCancelButtons();
 });
 
 // 데이터 가져오기 및 초기화
