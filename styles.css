@@ -258,3 +258,45 @@ footer {
 }
 
 
+/* 슬롯 아이템 스타일 */
+.slot-item {
+width: 100%; /* 슬롯 크기에 맞게 이미지 크기 설정 */
+height: auto;
+display: block;
+}
+
+/* 슬롯 취소 버튼 스타일 */
+.cancel-slot-button {
+position: absolute; /* 버튼 위치를 슬롯 내에 고정 */
+top: 5px; /* 슬롯의 상단에 위치 */
+right: 5px; /* 슬롯의 오른쪽 끝에 위치 */
+background-color: #ff4d4d; /* 버튼 색상 빨간색 */
+color: white;
+border: none;
+border-radius: 5px;
+padding: 5px;
+cursor: pointer;
+font-size: 0.8em;
+}
+
+.cancel-slot-button:hover {
+background-color: #ff1a1a; /* 마우스를 올렸을 때 더 진한 빨간색 */
+}
+
+/* 슬롯 스타일 */
+.slot {
+position: relative; /* 취소 버튼을 슬롯 내에 고정할 수 있도록 설정 */
+width: 90px;
+height: 90px;
+border: 2px dashed #ccc;
+background-color: #fff;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+/* 슬롯 취소 버튼 숨기기 */
+.hidden {
+display: none;
+}
+
