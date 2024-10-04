@@ -123,16 +123,42 @@ function handleSlotClick() {
 }
 
 // 슬롯에 아이템 선택
+// 슬롯에 아이템 선택
 function selectItem(id, element) {
     const slotNumber = selectedSlot.dataset.slot;
     const slot = document.querySelector(`.slot[data-slot="${slotNumber}"]`);
     slot.innerHTML = '';
 
+    // 아이템 이미지 추가
     const img = document.createElement('img');
     img.src = `https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${id}.png`;
     img.alt = element.querySelector('img').alt;
+    img.classList.add('slot-item');
     slot.appendChild(img);
+
+    // 개별 취소 버튼 추가
+    const cancelButton = document.createElement('button');
+    cancelButton.textContent = '취소';
+    cancelButton.classList.add('cancel-slot-button');
+    cancelButton.addEventListener('click', (event) => {
+        event.stopPropagation(); // 슬롯 클릭 이벤트를 방지
+        slot.innerHTML = ''; // 슬롯 비우기
+    });
+    slot.appendChild(cancelButton);
 }
+
+// 취소 버튼 토글 기능
+function toggleCancelButtons() {
+    const cancelButtons = document.querySelectorAll('.cancel-slot-button');
+    cancelButtons.forEach(button => {
+        button.classList.toggle('hidden');
+    });
+}
+
+document.getElementById('toggle-cancel-button').addEventListener('click', () => {
+    toggleCancelButtons();
+});
+
 
 // 모든 슬롯 상태 캡처
 function captureSlots() {
