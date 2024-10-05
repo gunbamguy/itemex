@@ -201,7 +201,7 @@ function captureSlots() {
         const sectorRect = captureSector.getBoundingClientRect();
         const lastRowRect = lastRow.getBoundingClientRect();
 
-        if (sectorRect.right > containerRect.right) {
+        if (sectorRect.right + 200 > containerRect.right) {
             lastRow.removeChild(captureSector);
 
             const newRow = document.createElement('div');
